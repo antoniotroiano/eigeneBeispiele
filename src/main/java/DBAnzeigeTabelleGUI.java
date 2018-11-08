@@ -18,17 +18,15 @@ public class DBAnzeigeTabelleGUI {
         try {
             jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-                TableModel jTable1Model = new DefaultTableModel(db.holeDaten(),
+                TableModel jTableModel = new DefaultTableModel(db.holeDaten(),
                         new String[] { "ID", "Vorname", "Nachname" });
                 jTable = new JTable();
-                jFrame.getContentPane().add(jTable, BorderLayout.CENTER);
-                jTable.setModel(jTable1Model);
-
+                //jFrame.getContentPane().add(jTable, BorderLayout.CENTER);
+                jTable.setModel(jTableModel);
 
         } catch(Exception e){
 
         }
-
         jFrame.add(jTable);
         jFrame.setVisible(true);
     }
