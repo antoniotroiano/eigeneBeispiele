@@ -5,7 +5,7 @@ import java.util.*;
 
 public class DBSelectMySQLLehrer {
 
-    public String[][] holeDaten(){
+    public String[][] holeDaten() {
         int columnindex = 0;
         int rowcounter = 0;
 
@@ -29,22 +29,19 @@ public class DBSelectMySQLLehrer {
 
             //Gibt das Ergebnis der SQL Abfrage aus. Über das Statementobjekt führen wir ne Methode aus.
             rs = stmt.executeQuery("select * from lehrer");
-
+            ResultSetMetaData headerTable = rs.getMetaData();
+            int anzahlSpalten = headerTable.getColumnCount();
+            //String nameSpalten = new String(anzahlSpalten);
             //Hiermit können wir mit der next() alle Datensätze ausgeben, diese interiert über alle Datensätze.
-            while(rs.next()){
-                try {
-                    columnindex = 0;
-                    //mit der schleife kann ich ne tabelle mit x spalten ausgeben
-                    //for(int i = 1;; i++){
-                        row.add(rs.getString(1));
-                        row.add(rs.getString(2));
-                        row.add(rs.getString(3));
-                        //columnindex++;
-                    //}
-                } catch(Exception e){
-                    System.out.println(e);
+            while (rs.next()) {
+                columnindex = 0;
+                //mit der schleife kann ich ne tabelle mit x spalten ausgeben
+                for (int i = 1; i <= anzahlSpalten; i++) {
+                    row.add(rs.getString(i));
+                    columnindex++;
                 }
             }
+
             //Objekte schließen
             rs.close();
             stmt.close();
