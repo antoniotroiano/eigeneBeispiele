@@ -24,16 +24,18 @@ public class MySQLUpdate {
             //Gibt das Ergebnis der SQL Abfrage aus. Über das Statementobjekt führen wir ne Methode aus.
             //Mit der Methode executeQuery gibt ein ResultSet zurück
             rs = stmt.executeQuery("select * from lehrer");
+            ResultSetMetaData headerTable = rs.getMetaData();
+            int anzahlSpaltenLehrer = headerTable.getColumnCount();
 
             //Hiermit können wir mit der next() alle Datensätze ausgeben, diese interiert über alle Datensätze. ResultSet Objekt wir dazu benötigt.
             while(rs.next()){
                 try {
                     //mit der schleife kann ich ne tabelle mit x spalten ausgeben
-                    for(int i = 1;; i++){
+                    for(int i = 1; i <= anzahlSpaltenLehrer; i++){
                         System.out.print(rs.getString(i) + "\t");
                     }
                 } catch(Exception e){
-                    System.out.println("");
+                    System.out.println(e);
                 }
             }
             //Objekte schließen
